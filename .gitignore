@@ -1,0 +1,7 @@
+node_modules
+.next
+.test-dist
+.env.local
+.env
+.pathwise-dev-logs
+*.tsbuildinfo
