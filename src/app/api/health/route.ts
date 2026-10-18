@@ -6,7 +6,7 @@ export function GET() {
       status: "ok",
       services: {
         liveGuide: liveAvailable,
-        liveProvider: geminiConfigured ? "Gemini Live" : "Gemini Live needs GEMINI_API_KEY",
+        liveProvider: geminiConfigured ? "Live Voice" : "Live Voice needs GEMINI_API_KEY",
         syncedPersistence: Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY),
       },
       retention: "This starter stores no camera or microphone recording on the server.",

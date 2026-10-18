@@ -16,7 +16,7 @@ function canIssueUnauthenticatedDevelopmentToken() {
 export async function POST() {
   if (!process.env.GEMINI_API_KEY) {
     return Response.json(
-      { code: "GEMINI_NOT_CONFIGURED", message: "Add GEMINI_API_KEY on the server to enable Gemini Live." },
+      { code: "GEMINI_NOT_CONFIGURED", message: "Add GEMINI_API_KEY on the server to enable live voice." },
       { status: 503 },
     );
   }
@@ -25,7 +25,7 @@ export async function POST() {
     return Response.json(
       {
         code: "LIVE_AUTH_REQUIRED",
-        message: "Gemini Live is protected in production until PATHWISE authentication is configured. The long-lived Gemini key is never sent to the browser.",
+        message: "Live voice is protected in production until PATHWISE authentication is configured. The long-lived API key is never sent to the browser.",
       },
       { status: 403 },
     );
@@ -69,7 +69,7 @@ export async function POST() {
   } catch (error) {
     console.error("PATHWISE_GEMINI_LIVE_TOKEN_FAILED", error instanceof Error ? error.name : "unknown");
     return Response.json(
-      { code: "GEMINI_LIVE_UNAVAILABLE", message: "A Gemini Live session could not be started. No profile data was changed." },
+      { code: "GEMINI_LIVE_UNAVAILABLE", message: "A live voice session could not be started. No profile data was changed." },
       { status: 502 },
     );
   }

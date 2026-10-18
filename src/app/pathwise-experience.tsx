@@ -361,7 +361,7 @@ export default function PathwiseExperience() {
       source.start(when);
       setIsSpeaking(true);
     } catch {
-      setGuideNote("Gemini Live audio could not be played in this browser. The transcript remains available.");
+      setGuideNote("Live audio could not be played in this browser. The transcript remains available.");
     }
   };
 
@@ -369,7 +369,7 @@ export default function PathwiseExperience() {
     if (liveSessionRef.current) return;
     if (!window.isSecureContext && window.location.hostname !== "localhost") {
       setGuideState("error");
-      setGuideNote("Gemini Live needs a secure HTTPS page (or localhost) to use the microphone.");
+      setGuideNote("Voice interview needs a secure HTTPS page (or localhost) to use the microphone.");
       return;
     }
     if (!navigator.mediaDevices?.getUserMedia) {
@@ -379,11 +379,11 @@ export default function PathwiseExperience() {
     }
 
     setGuideState("thinking");
-    setGuideNote("Starting a secure Gemini Live voice session...");
+    setGuideNote("Starting a secure live voice session...");
     try {
       const tokenResponse = await fetch("/api/live-token", { method: "POST", headers: { "Content-Type": "application/json" } });
       const tokenPayload = await tokenResponse.json().catch(() => null) as { token?: string; model?: string; message?: string } | null;
-      if (!tokenResponse.ok || !tokenPayload?.token || !tokenPayload.model) throw new Error(tokenPayload?.message ?? "Gemini Live is unavailable.");
+      if (!tokenResponse.ok || !tokenPayload?.token || !tokenPayload.model) throw new Error(tokenPayload?.message ?? "Live voice is unavailable.");
 
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true },
@@ -422,7 +422,7 @@ export default function PathwiseExperience() {
             }
             if (server.turnComplete) {
               setGuideState("idle");
-              setGuideNote("Gemini Live is listening. You can interrupt naturally or type your next question.");
+              setGuideNote("PATHWISE is listening. You can interrupt naturally or type your next question.");
               setLiveTranscript("");
               liveUserMessageIdRef.current = "";
               liveAssistantMessageIdRef.current = "";
@@ -430,7 +430,7 @@ export default function PathwiseExperience() {
           },
           onerror: () => {
             setGuideState("error");
-            setGuideNote("Gemini Live disconnected. Your confirmed profile is unchanged; reconnect or use text.");
+            setGuideNote("Live session disconnected. Your confirmed profile is unchanged; reconnect or use text.");
           },
           onclose: () => {
             if (liveSessionRef.current) {
@@ -472,17 +472,17 @@ export default function PathwiseExperience() {
       setIsListening(true);
       setIsLiveVoiceMode(true);
       setGuideState("idle");
-      setGuideNote("Gemini Live is connected. Speak naturally; native audio and live transcripts are on.");
+      setGuideNote("Live voice is connected. Speak naturally; native audio and live transcripts are on.");
     } catch (error) {
       closeLiveSession();
       setGuideState("error");
-      setGuideNote(error instanceof Error ? error.message : "Gemini Live could not start. You can continue by typing.");
+      setGuideNote(error instanceof Error ? error.message : "Live voice could not start. You can continue by typing.");
     }
   };
 
   const stopListening = () => {
     closeLiveSession();
-    setGuideNote("Gemini Live voice session ended. You can restart it or continue by typing.");
+    setGuideNote("Live voice session ended. You can restart it or continue by typing.");
   };
 
   const toggleLiveVoiceMode = () => {
@@ -516,12 +516,12 @@ export default function PathwiseExperience() {
       liveAssistantMessageIdRef.current = "";
       setMessages((current) => [...current, { ...userMessage, source: "live" }]);
       setGuideState("thinking");
-      setGuideNote("Sent to Gemini Live. PATHWISE will respond in native audio and transcript form.");
+      setGuideNote("Sent to PATHWISE. Response will play in native audio and transcript form.");
       try {
         liveSessionRef.current.sendRealtimeInput({ text: message });
       } catch {
         setGuideState("error");
-        setGuideNote("The Gemini Live session ended before that message could be sent. Reconnect or use text.");
+        setGuideNote("The live voice session ended before that message could be sent. Reconnect or use text.");
       }
       return;
     }
@@ -763,13 +763,13 @@ export default function PathwiseExperience() {
         <div style={{ display: "grid", gap: "6px" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", width: "fit-content", padding: "5px 13px", borderRadius: "999px", background: aiAvailable ? "rgba(16, 185, 129, 0.12)" : "rgba(245, 158, 11, 0.12)", border: aiAvailable ? "1px solid #10b981" : "1px solid #f59e0b", color: aiAvailable ? "#047857" : "#b45309", fontSize: "11px", fontWeight: "800", letterSpacing: "0.06em", textTransform: "uppercase" }}>
             <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: aiAvailable ? "#10b981" : "#f59e0b", boxShadow: aiAvailable ? "0 0 10px #10b981" : "none" }} />
-            {aiAvailable ? "GEMINI LIVE VOICE READY" : "GUIDED ASSISTANT"}
+            {aiAvailable ? "LIVE VOICE READY" : "GUIDED ASSISTANT"}
           </div>
           <h1 style={{ margin: 0, fontSize: "clamp(26px, 3.2vw, 36px)", fontWeight: "900", letterSpacing: "-0.03em", color: "#0c3a34", lineHeight: "1.15" }}>
-            Gemini Live voice interview
+            Live voice interview
           </h1>
           <p style={{ margin: 0, fontSize: "14px", color: "#4f756e", maxWidth: "700px", lineHeight: "1.5" }}>
-            Speak naturally with Gemini Live, discuss Indian education and career routes, or use the camera separately for a local-only preview.
+            Speak naturally with PATHWISE, discuss Indian education and career routes, or use the camera separately for a local-only preview.
           </p>
         </div>
 
@@ -1049,7 +1049,7 @@ export default function PathwiseExperience() {
           {/* Guide Processing Note */}
           <div style={{ padding: "8px 12px", borderRadius: "12px", background: guideState === "error" ? "#fee2e2" : "#f0fbf7", border: guideState === "error" ? "1px solid #fca5a5" : "1px solid #cce8de", color: guideState === "error" ? "#991b1b" : "#077965", fontSize: "11px", fontWeight: "650", display: "flex", alignItems: "center", gap: "6px" }}>
             <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: guideState === "error" ? "#dc2626" : "#10b981" }} />
-            {guideState === "thinking" ? "PATHWISE is processing your Gemini Live input..." : guideNote}
+            {guideState === "thinking" ? "PATHWISE is processing your voice input..." : guideNote}
           </div>
 
           {/* Floating Composer Bar */}
@@ -1171,7 +1171,7 @@ export default function PathwiseExperience() {
         {cameraActive && (
           <>
             <button className="button primary" onClick={() => goTo("interview")}>
-              <Mic size={17} /> Continue to Gemini Live interview
+              <Mic size={17} /> Continue to voice interview
             </button>
             <button className="button secondary" onClick={captureCamera}>Capture preview</button>
             <button className="button secondary" onClick={stopCamera}>Turn off</button>
