@@ -72,7 +72,7 @@ Through an ongoing, multimodal interaction, **PATHWISE** understands the deep ta
 ---
 
 ### 3. Distinct Routes, Not One Verdict (Plan A through Plan L)
-*Why settle for a single biased chatbot opinion? PATHWISE generates distinct alternative plans scored mathematically.*
+*PATHWISE generates distinct alternative plans scored mathematically, rather than forcing a single verdict.*
 
 ![Pathway Comparison Plans](screenshots/03-pathway-comparison-plans.png)
 
@@ -108,18 +108,6 @@ Through an ongoing, multimodal interaction, **PATHWISE** understands the deep ta
 
 ---
 
-## ⚡ Why PATHWISE is Different from ChatGPT
-
-| Dimension | Standard Chatbots (e.g., ChatGPT) | **PATHWISE** |
-| :--- | :--- | :--- |
-| **Output** | Unstructured walls of text and generic suggestions. | **Structured decision canvas** with distinct Plans A–L, milestones, and actionable tasks. |
-| **Constraints** | Suggests ideas regardless of whether you have the time or budget. | **Enforces hard constraints**: validates budget (₹), weekly study hours, timeline to income, and relocation feasibility. |
-| **Cultural Reality** | Treats career decisions in isolation. | **Socioculturally grounded**: separates personal desires from family expectations and social prestige pressure. |
-| **Scoring** | Subjective, hallucinatory opinions. | **Deterministic scoring engine** calculating feasibility, profile match, and evidence quality. |
-| **When Life Changes** | You must re-explain everything in a new chat. | **Dynamic Re-planning Engine**: updates the roadmap while preserving completed milestones. |
-| **Interaction** | Text prompts and generic chatbot turns. | **Low-latency live voice interaction** designed for approachable, natural conversation. |
-
----
 
 ## 🛠️ Architecture & Tech Stack
 
